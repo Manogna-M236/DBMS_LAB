@@ -1,0 +1,160 @@
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> DECLARE
+  2      n NUMBER := &n;
+  3  BEGIN
+  4      IF MOD(n, 2) = 0 THEN
+  5          DBMS_OUTPUT.PUT_LINE('Number is Even');
+  6      ELSE
+  7          DBMS_OUTPUT.PUT_LINE('Number is Odd');
+  8      END IF;
+  9  END;
+ 10  /
+Enter value for n: 45
+old   2:     n NUMBER := &n;
+new   2:     n NUMBER := 45;
+Number is Odd                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> DECLARE
+  2      n NUMBER;
+  3      i NUMBER;
+  4  BEGIN
+  5      n := &n;
+  6  
+  7      FOR i IN 1..10
+  8      LOOP
+  9          DBMS_OUTPUT.PUT_LINE(n || ' x ' || i || ' = ' || (n*i));
+ 10      END LOOP;
+ 11  END;
+ 12  /
+Enter value for n: 8
+old   5:     n := &n;
+new   5:     n := 8;
+8 x 1 = 8                                                                       
+8 x 2 = 16                                                                      
+8 x 3 = 24                                                                      
+8 x 4 = 32                                                                      
+8 x 5 = 40                                                                      
+8 x 6 = 48                                                                      
+8 x 7 = 56                                                                      
+8 x 8 = 64                                                                      
+8 x 9 = 72                                                                      
+8 x 10 = 80                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> DECLARE
+  2      n NUMBER;
+  3      fac NUMBER := 1;
+  4      i NUMBER;
+  5  BEGIN
+  6      n := &n;
+  7  
+  8      FOR i IN 1..n
+  9      LOOP
+ 10          fac := fac * i;
+ 11      END LOOP;
+ 12  
+ 13      DBMS_OUTPUT.PUT_LINE('Factorial = ' || fac);
+ 14  END;
+ 15  /
+Enter value for n: 4
+old   6:     n := &n;
+new   6:     n := 4;
+Factorial = 24                                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> DECLARE
+  2      first NUMBER := 0;
+  3      second NUMBER := 1;
+  4      third NUMBER;
+  5      n NUMBER := &n;
+  6      i NUMBER;
+  7  BEGIN
+  8      DBMS_OUTPUT.PUT_LINE('Fibonacci Series:');
+  9      DBMS_OUTPUT.PUT_LINE(first);
+ 10      DBMS_OUTPUT.PUT_LINE(second);
+ 11  
+ 12      FOR i IN 3..n
+ 13      LOOP
+ 14          third := first + second;
+ 15          first := second;
+ 16          second := third;
+ 17  
+ 18          DBMS_OUTPUT.PUT_LINE(third);
+ 19      END LOOP;
+ 20  END;
+ 21  /
+Enter value for n: 5
+old   5:     n NUMBER := &n;
+new   5:     n NUMBER := 5;
+Fibonacci Series:                                                               
+0                                                                               
+1                                                                               
+1                                                                               
+2                                                                               
+3                                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> DECLARE
+  2      n NUMBER;
+  3      rev NUMBER := 0;
+  4      r NUMBER;
+  5  BEGIN
+  6      n := &n;
+  7  
+  8      WHILE n > 0
+  9      LOOP
+ 10          r := MOD(n, 10);
+ 11          rev := (rev * 10) + r;
+ 12          n := TRUNC(n / 10);
+ 13      END LOOP;
+ 14  
+ 15      DBMS_OUTPUT.PUT_LINE('Reverse is ' || rev);
+ 16  END;
+ 17  /
+Enter value for n: 678
+old   6:     n := &n;
+new   6:     n := 678;
+Reverse is 876                                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> DECLARE
+  2      str1 VARCHAR2(50) := '&str';
+  3      str2 VARCHAR2(50);
+  4      len NUMBER;
+  5      i NUMBER;
+  6  BEGIN
+  7      len := LENGTH(str1);
+  8  
+  9      FOR i IN REVERSE 1..len
+ 10      LOOP
+ 11          str2 := str2 || SUBSTR(str1, i, 1);
+ 12      END LOOP;
+ 13  
+ 14      DBMS_OUTPUT.PUT_LINE('Reverse of String is: ' || str2);
+ 15  END;
+ 16  /
+Enter value for str: dbmslab
+old   2:     str1 VARCHAR2(50) := '&str';
+new   2:     str1 VARCHAR2(50) := 'dbmslab';
+Reverse of String is: balsmbd                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off
